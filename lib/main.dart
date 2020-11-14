@@ -65,13 +65,15 @@ class _HomePageState extends State<HomePage> {
               case ConnectionState.active:
                 break;
               case ConnectionState.waiting:
-                return Center(child: CircularProgressIndicator());
-                break;
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               case ConnectionState.done:
                 if (snapshot.hasError) return errorData(snapshot);
                 return questionList();
-                return null;
+                break;
             }
+            return null;
           },
         ),
       ),
@@ -87,15 +89,16 @@ class _HomePageState extends State<HomePage> {
           Text("Error: ${snapshot.error}"),
           SizedBox(height: 20.0),
           RaisedButton(
-              child: Text("Try Again"),
-              onPressed: () {
-                fetchQuiz();
-                setState(
-                  () {
-                    fetchQuiz();
-                  },
-                );
-              })
+            child: Text("Try Again"),
+            onPressed: () {
+              fetchQuiz();
+              setState(
+                () {
+                  fetchQuiz();
+                },
+              );
+            },
+          )
         ],
       ),
     );
@@ -165,16 +168,16 @@ class AnswerWidget extends StatefulWidget {
 }
 
 class _AnswerWidgetState extends State<AnswerWidget> {
-  Color color = Colors.black;
+  Color c = Colors.black;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
         setState(() {
           if (widget.m == widget.results[widget.index].correctAnswer) {
-            color = Colors.green;
+            c = Colors.green;
           } else {
-            color = Colors.red;
+            c = Colors.red;
           }
           // Change the print statements to set colors
         });
